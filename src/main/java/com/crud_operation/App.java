@@ -1,5 +1,8 @@
 package com.crud_operation;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,7 +18,7 @@ public class App
         SessionFactory sessionFactory=configuration.buildSessionFactory();
         
         Session session=sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+      //  Transaction transaction = session.beginTransaction();
         
         //to insert record we will create object
 //        Student student = new Student();
@@ -37,17 +40,27 @@ public class App
         
         //delete operation
         //step 1:Fetch the records
-        Student student=(Student) session.get(Student.class, 2);
+//        Student student=(Student) session.get(Student.class, 2);
+//        
+//        //step 2:Delete the records
+//        session.delete(student);
+//        
+//        
+//        
+//        transaction.commit();
         
-        //step 2:Delete the records
-        session.delete(student);
-        
-        
-        
-        transaction.commit();
+        //Fectching all records
+        Query query = session.createQuery("from Student");
+        List<Student> students=query.list();
+        for(Student student: students) {
+        	System.out.println("ID >>" + student.getId());
+        	System.out.println("Name >> " + student.getName());
+        	System.out.println("City >> " + student.getCity());
+        	System.out.println("Mobile no >> " + student.getMobile());
+        }
         
         session.close();
         
-        System.out.println("record deleted successfully");
+        System.out.println("record fetched successfully");
     }
 }
