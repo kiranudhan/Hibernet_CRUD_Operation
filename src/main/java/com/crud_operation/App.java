@@ -26,19 +26,28 @@ public class App
 //        session.save(student);
         
         //update operation
+//        //step 1:Fetch the records
+//        Student student = (Student) session.get(Student.class, 1);
+//        System.out.println("Before update :: " + student);
+//        //step 2:Edit record
+//        student.setName("swati");
+//        System.out.println("After edit :: " + student);
+//        //step 3:Update record
+//        session.update(student);
+        
+        //delete operation
         //step 1:Fetch the records
-        Student student = (Student) session.get(Student.class, 1);
-        System.out.println("Before update :: " + student);
-        //step 2:Edit record
-        student.setName("swati");
-        System.out.println("After edit :: " + student);
-        //step 3:Update record
-        session.update(student);
+        Student student=(Student) session.get(Student.class, 2);
+        
+        //step 2:Delete the records
+        session.delete(student);
+        
+        
         
         transaction.commit();
         
         session.close();
         
-        System.out.println("record updated successfully");
+        System.out.println("record deleted successfully");
     }
 }
